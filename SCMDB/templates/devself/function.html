@@ -1,0 +1,33 @@
+{%extends 'devself/Layout/Master_after_login.html'%}
+{%block title%}主页{%endblock%}
+{%block content%}
+{%include 'devself/Layout/index.html'%}
+
+    <div class="content">
+        <div class="main-content">
+            
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#home" data-toggle="tab">{{function_name}}</a></li>
+        </ul>
+        <h4 style="color:red">{{info}}</h4>
+        <div class="row">
+          <div class="col-md-4">
+            <br>
+            <div id="myTabContent" class="tab-content">
+            
+              <div class="tab-pane active in" id="home">
+              <form id="tab" method="POST" action=''>  
+                {%csrf_token%}              
+                <div class="form-group">
+                    {{changpasswd.as_p}}
+                </div>
+                <input type='submit' class="btn btn-primary" value='{{button_value}}'/>
+               </form>
+              </div>
+            </div>
+          </div>
+         </div>
+        </div>
+{%include 'devself/Layout/footer.html'%}        
+    </div>        
+{%endblock%}

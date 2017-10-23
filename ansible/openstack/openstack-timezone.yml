@@ -1,0 +1,5 @@
+- hosts: all
+  tasks:
+  - name: modify timezone 
+    command:
+        timedatectl set-timezone Asia/Shanghai

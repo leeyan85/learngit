@@ -1,0 +1,150 @@
+[ump_us_host]
+10.120.0.70
+10.120.15.254
+10.120.14.150
+10.120.0.166
+10.120.14.92
+10.212.0.89
+10.212.75.182
+
+[ump_us_vm]
+10.120.9.58
+
+
+[ump_china_host]
+10.183.92.76
+10.183.92.53
+10.183.92.54
+10.183.92.64
+10.183.92.65
+10.110.126.59
+10.127.91.59
+10.127.91.58
+10.127.91.57
+10.127.91.56
+10.127.91.55
+10.127.91.54
+10.127.91.53
+10.127.91.52
+10.127.91.51
+10.127.91.50
+10.127.93.25
+10.183.96.133
+10.184.222.21
+10.184.222.22
+10.183.97.38
+10.183.97.39
+10.183.97.42
+10.183.97.43
+10.183.97.45
+10.183.97.46
+10.183.97.47
+10.183.97.48
+10.183.97.49
+10.183.97.50
+10.183.97.54
+10.183.97.55
+10.183.97.56
+10.183.97.57
+10.183.97.58
+10.183.196.124
+10.183.196.190
+10.76.0.77
+10.76.0.80
+
+[ump_china_vm]
+10.135.29.179
+10.135.29.180
+10.112.32.90
+10.112.33.249
+10.112.34.22
+10.112.35.48
+10.185.29.59
+
+
+[diantong_develop_vm]
+10.75.30.58 hostname=vm-10-75-30-58
+10.75.30.56 hostname=vm-10-75-30-56
+10.75.30.50 hostname=vm-10-75-30-50
+10.75.30.51 hostname=vm-10-75-30-51
+10.75.30.53 hostname=vm-10-75-30-53
+10.75.30.49 hostname=vm-10-75-30-49
+10.75.30.47 hostname=vm-10-75-30-47
+10.75.30.46 hostname=vm-10-75-30-46
+10.75.30.45 hostname=vm-10-75-30-45
+10.75.30.44 hostname=vm-10-75-30-44
+10.75.30.43 hostname=vm-10-75-30-43
+10.75.30.42 hostname=vm-10-75-30-42
+10.75.30.41 hostname=vm-10-75-30-41
+10.75.30.40 hostname=vm-10-75-30-40
+10.75.30.61 hostname=vm-10-75-30-61
+10.75.30.62 hostname=vm-10-75-30-62
+10.75.30.33 hostname=vm-10-75-30-33
+10.75.30.30 hostname=vm-10-75-30-30
+10.75.30.36 hostname=vm-10-75-30-36
+10.75.30.34 hostname=vm-10-75-30-34
+10.75.30.38 hostname=vm-10-75-30-38
+10.75.30.29 hostname=vm-10-75-30-29
+10.75.30.69 hostname=vm-10-75-30-69
+10.75.30.67 hostname=vm-10-75-30-67
+10.75.30.60 hostname=vm-10-75-30-60
+10.75.30.32 hostname=vm-10-75-30-32
+ 
+[diantong_scm_vm]
+10.75.30.57 hostname=vm-10-75-30-57
+10.75.30.52 hostname=vm-10-75-30-52
+10.75.30.66 hostname=vm-10-75-30-66
+10.75.30.65 hostname=vm-10-75-30-65
+
+
+[assigned_servers] #ServiceTree空闲机器中已经分配并且改名的机器,需要迁移服务树
+10.127.91.52 hostname=pcnbj-cp004
+10.127.91.53 hostname=pcnbj-cp005
+10.127.91.54 hostname=pcnbj-cp006
+10.127.91.55 hostname=pcnbj-cp007
+10.127.91.56 hostname=pcnbj-cp008
+10.127.91.57 hostname=pcnbj-cp009
+10.127.91.58 hostname=pcnbj-cp010
+10.127.91.59 hostname=pcnbj-cp011
+10.183.97.42 hostname=zabbix
+
+
+[not_assign_now] #ServiceTree空闲机器,还没有分配的机器，没有修改机器名,待分配机器名后，安装zabbix
+10.183.97.50  hostname=ubuntu
+10.127.91.50  hostname=ubuntu
+10.127.93.25  hostname=ubuntu
+10.127.91.51  hostname=ubuntu
+10.183.97.54  hostname=ubuntu
+10.183.97.55  hostname=ubuntu
+10.183.97.56  hostname=ubuntu
+10.183.97.57  hostname=ubuntu
+10.183.97.58  hostname=ubuntu
+10.183.97.43  hostname=ubuntu
+10.183.97.47  hostname=ubuntu
+10.183.97.46  hostname=ubuntu
+10.183.97.45  hostname=ubuntu
+10.183.97.49  hostname=ubuntu
+10.183.97.48  hostname=ubuntu
+10.184.222.21 hostname=ubuntu internal_ip=10.183.106.68  #the IP is manageIP, there is not internal IP
+10.184.222.22 hostname=ubuntu internal_ip=10.183.106.69  #the IP is manageIP, there is not internal IP
+
+
+[network_unreachable_shenzheng] #深圳网络不通
+10.76.0.80
+10.76.0.77
+
+[network_unreachable_US] #美国网络不通
+10.212.0.89
+10.120.14.92
+10.212.75.182
+10.120.0.166
+10.120.14.150
+10.120.0.70
+10.120.9.58
+10.120.15.254
+
+
+[not_install_zabbix:children] #没有安装zabbix客户端的机器
+not_assign_now
+network_unreachable_shenzheng
+network_unreachable_US

@@ -1,0 +1,14 @@
+- name: transfer to remote server2 
+  template:
+    src: .gitconfig
+    dest: "{{linux_home_dir}}"
+  sudo: yes
+
+#- name: echo {{package}} package
+#  command:
+#    echo {{package}}
+#  register: result 
+#- name: debug result
+#  debug: var=result
+#    #command: echo "{{PROJECT}}"
+

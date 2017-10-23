@@ -1,0 +1,19 @@
+- hosts: all
+  tasks:
+    - name: change IP to hostname
+      shell: echo {{ansible_default_ipv4.address}} | sed 's/^/vm-/;s/\./-/g'
+      register: host_name
+      sudo: yes
+    - name: hostname
+      lineinfile: dest=/etc/hostname regexp={{ansible_hostname}} line={{host_name.stdout}}
+      sudo: yes
+    - name: IP format
+      shell: echo "127.0.1.1aaaaaaa" | sed 's/a/ /g'
+      register: host_ip
+    - name: Modify the hosts
+      lineinfile: dest=/etc/hosts regexp={{ansible_hostname}} line="{{host_ip.stdout}}{{host_name.stdout}}"
+      tags: hostname
+      sudo: yes
+    - name: restart service
+      service: name=hostname state=restarted
+      sudo: yes

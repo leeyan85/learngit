@@ -1,0 +1,3 @@
+---
+- name: incluede tasks/template.yml
+  include: template.yml

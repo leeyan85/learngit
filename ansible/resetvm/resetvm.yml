@@ -1,0 +1,69 @@
+---
+
+- hosts: all
+  remote_user: letv
+  tasks:
+   - name: copy smb.conf
+     copy: src=../files/smb.conf dest=/etc/samba/
+     sudo: yes
+   - name: copy passdb
+     copy: src=../files/passdb.tdb dest=/var/lib/samba/private/
+     sudo: yes
+   - name: restart samba service
+     service: name=smbd state=restarted
+     sudo: yes
+   - name: copy group
+     copy: src=/letv/tools/group dest=/etc 
+     sudo: yes
+   - name: copy shadow
+     copy: src=/letv/tools/shadow dest=/etc mode=640
+     sudo: yes
+   - name: reset vnc passwd
+     copy: src=../files/passwd dest=/home/andbase/.vnc/ owner=andbase group=andbase 
+     sudo: yes
+   - name: cp usgitconfig
+     copy: src=./gitconfig-us dest=/tmp/tools/
+#  - name: copy .gitconfig
+#    copy: src=../files/.gitconfig-us dest=/tmp/tools
+   - name: copy andbase
+     copy: src=/letv/tools/andbase.tar dest=/tmp/tools
+  
+   - name: call resetvm.sh
+     script: /letv/ansible/ci_scripts/devops/rdvm/resetvm/resetvm.sh
+     sudo: yes
+
+   - name: alias vmrf
+     lineinfile: dest=/home/andbase/.bashrc  state=present line="alias vmrf='xfwm4 --replace &'"
+     sudo: yes
+
+   - name: alias vmcfg
+     lineinfile: dest=/home/andbase/.bashrc state=present line="alias vmcfg='sudo python2.7 /home/andbase/.ssh/vmsetup/vm_setup.py'"
+     sudo: yes
+
+   - name: sed desktop.xml
+     shell: sed -i 's/name=\"image-style\" type=\"int\" value=\"5\"/name=\"image-style\" type=\"int\" value=\"3\"/g' /home/andbase/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+     sudo: yes
+
+   - name: sed sudoers
+     shell: sed -i 's/%sudo/#%sudo/g' /etc/sudoers
+     sudo: yes
+
+   - name: letv_sudo
+     lineinfile: dest=/etc/sudoers state=present line="letv    ALL=(ALL) NOPASSWD:ALL"
+     sudo: yes
+
+   - name: restore /etc/profile
+     shell: sed -i 's#.*10.148.16.47.*##g' /etc/profile
+     sudo: yes
+
+   - name: restore rc.local
+     shell: sed -i 's#.*10.148.16.47.*##g' /etc/rc.local
+     sudo: yes
+
+   - name: umount /le_data
+     shell: umount -l /le_data
+     sudo: yes  
+
+   - name: init 6
+     shell: init 6
+     sudo: yes

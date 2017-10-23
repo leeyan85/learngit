@@ -1,0 +1,17 @@
+- hosts: all
+  tasks:
+  - name: umount /home
+    command:
+        umount /home
+  - name: create /data
+    command:
+        mkdir /data
+  - name: mount /data
+    command:
+        mount /dev/mapper/cl-home /data
+
+  - name: modify fstab
+    lineinfile:
+      dest: /etc/fstab
+      regexp: /dev/mapper/cl-home
+      line: /dev/mapper/cl-home     /data                   xfs     defaults        0 0

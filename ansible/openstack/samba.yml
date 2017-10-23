@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: install libtalloc2
+    command:  apt-get install --reinstall libsmbclient libsmbclient-dev libtevent0 libtalloc2
+    sudo: yes
+        
+  - name: restart samba
+    service: name=smbd state=restarted
+    sudo: yes

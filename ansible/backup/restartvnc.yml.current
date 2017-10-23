@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  remote_user: letv
+  tasks:
+   - name: restart VNC ports
+     #shell: ports="`ps -ef | grep vnc | grep -v 'grep' | awk '{print $9}' | grep -v iconic`";if [ "`echo $ports`" != "" ]; then for i in `echo "$ports"`;do  sudo  su - andbase -c "vncserver -kill $i";sudo  su - andbase -c "vncserver $i";done;for i in `echo ":10 :11 :12"`;do sudo  su - andbase -c "vncserver $i";done;else for i in `echo ":10 :11 :12"`;do sudo  su - andbase -c "vncserver $i";done;fi
+     shell: ports="`ps -ef | grep vnc | grep -v 'grep' | awk '{print $9}' | grep -v iconic`";if [ "`echo $ports`" != "" ]; then for i in `echo "$ports"`;do  sudo  su - andbase -c "vncserver -kill $i";sudo rm -rf /tmp/.X*;sudo  su - andbase -c "vncserver $i";done;for i in `echo ":10 :11 :12"`;do sudo  su - andbase -c "vncserver $i";done;else for i in `echo ":10 :11 :12"`;do sudo  su - andbase -c "vncserver $i";done;fi
+     sudo: yes
+   #- name: start VNC ports
+    # shell: for i in `echo "{{ports.stdout}}"`;do  sudo  su - andbase -c "vncserver $i";done
+    # sudo: yes

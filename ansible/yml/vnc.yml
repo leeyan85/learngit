@@ -1,0 +1,17 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: install tightvncserver
+    apt: name=tightvncserver state=present
+    sudo: yes
+  - name: install autpcutsel
+    apt: name=autocutsel state=present
+    sudo: yes
+  - name: modify xstartup
+    copy: src=/letv/leey/ansible/openstack/xstartup dest=/home/letv/.vnc/ owner=letv group=letv mode=0777
+    #copy: src=/letv/leey/ansible/openstack/xstartup dest=/home/andbase/.vnc/ owner=andbase group=andbase mode=0777
+    sudo: yes
+  - name: restart vnc
+    script: /letv/leey/ansible/openstack/startvnc.sh
+    sudo: yes

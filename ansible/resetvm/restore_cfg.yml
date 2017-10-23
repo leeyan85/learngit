@@ -1,0 +1,26 @@
+ - hosts: debug
+   tasks:
+     - name: cp backup cfg to dest VM
+       copy: src=/letv/workspace/cfg_backup/{{ansible_default_ipv4.address}}/tmp/andbase/andbase.tar.gz dest=/tmp/ owner=root group=root
+       sudo: yes
+     - name: cp white list
+       copy: src=/letv/workspace/cfg_backup/{{ansible_default_ipv4.address}}/tmp/andbase/{{item.value}} dest=/etc/ owner=root group=root
+       with_items:
+          - {value: 'hosts.allow'}
+          - {value: 'services_hosts_allow'}
+          - {value: 'zabbix_hosts_allow'} 
+       sudo: yes
+       ignore_errors: yes
+     - name: tar package
+       shell: tar zxvf andbase.tar.gz chdir=/tmp
+       sudo: yes
+     - name: restore cfg
+       shell: cp -rf home/ / chdir=/tmp
+       sudo: yes
+       sudo_user: andbase
+     - name: remove packages
+       shell: rm -rf {{item.value}} chdir=/tmp
+       with_items:
+          - {value: 'andbase.tar.gz'}
+          - {value: 'home'}
+       sudo: yes

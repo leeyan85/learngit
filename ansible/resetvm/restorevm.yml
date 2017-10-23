@@ -1,0 +1,27 @@
+- hosts: vm
+  remote_user: letv
+  tasks:
+    - name: copy andbase
+      copy: src=/letv/workspace/cfg_backup/{{ ansible_all_ipv4_addresses[0]}}/tmp/andbase/{{ item }} dest=/tmp owner=andbase group=andbase 
+      with_items:
+        - andbase.tar.gz
+        - hosts.allow
+        - services_hosts_allow
+      sudo: yes
+    - name: unzip andbase.tar.gz
+      shell: tar -xvf andbase.tar.gz chdir=/tmp
+      sudo: yes
+      sudo_user: andbase
+    - name: copy allow
+      shell: cp /tmp/hosts.allow /tmp/services_hosts_allow /etc
+      sudo: yes
+    - name: chown andbase
+      shell: chown -R andbase:andbase /home/andbase/.gitconfig* /home/andbase/.ssh
+      sudo: yes
+    - name: copy andbase to user directory
+      shell: cp -a /tmp/home/andbase/. /home/andbase
+      sudo: yes
+      sudo_user: andbase
+    - name: clean
+      shell: rm -rf andbase.tar.gz hosts.allow services_hosts_allow home
+      sudo: yes

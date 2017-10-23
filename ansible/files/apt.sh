@@ -1,0 +1,1 @@
+apt-get install -y bison g++-multilib git gperf libxml2-utils make python-networkx zlib1g-dev:i386 zip g++ gcc cpp cpp-4.8 g++-4.8 gcc-4.8 binutils dos2unix wine nfs-common gitk tig cscope ctags gitg tmux screen emacs nedit xemacs21 u-boot-tools vnc4server tree vsftpd python-pip kdiff3

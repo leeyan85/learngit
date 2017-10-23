@@ -1,0 +1,36 @@
+{%extends 'devself/Layout/Master_after_login.html'%}
+{%block title%}主页{%endblock%}
+{%block content%}
+{%include 'devself/Layout/index.html'%}
+
+
+<div class="content">
+<div class="main-content">
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Hostname</th>
+      <th>IPaddress</th>
+      <th style="width: 3.5;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for key,value in vms.items %}
+        <tr> 
+          <td>{{ key.name }}</td>
+          <td>{{ value.ip }}</td>
+          <td>             
+              <a href="/mountnfs/{{ value.ip }}" role="button" data-toggle="modal">Mount NFS disk&nbsp;&nbsp;</a></br>
+              <a href="/restartvnc/{{ value.ip }}" role="button" data-toggle="modal">Restart VNC service&nbsp;&nbsp;</a></br>
+              <a href="/modifypassword/{{ value.ip }}" role="button" data-toggle="modal">Reset VM password</a></br>
+          </td>      
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{%include 'devself/Layout/footer.html'%}    
+{%endblock%}
+
+

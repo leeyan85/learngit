@@ -1,0 +1,10 @@
+---
+- hosts: all 
+  tasks:
+  - name: include setup vmcfg
+    include: vmcfg.yml
+  - name: include disk init
+    include: disk_init.yml
+  - name: modify timezone
+    include: modify_timezone.yml
+

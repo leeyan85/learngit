@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+    - name: transfer to remote server2 
+      template:
+        src: /letv/scripts/ansible/roles/template/templates/.gitconfig
+        dest: /home/andbase
+      sudo: yes
+

@@ -1,0 +1,12 @@
+- hosts: all
+  remote_user: letv
+  tasks:
+   - name: restore /etc/profile
+     shell: sed -i 's#.*10.148.16.47.*##g' /etc/profile
+     sudo: yes
+   - name: restore rc.local
+     shell: sed -i 's#.*10.148.16.47.*##g' /etc/rc.local
+     sudo: yes
+   - name: umount /le_data
+     shell: umount -l /le_data
+     sudo: yes 

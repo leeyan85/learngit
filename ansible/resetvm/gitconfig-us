@@ -1,0 +1,21 @@
+[user]
+    name = <Full Name>
+    email = <email>
+[core]
+    editor = vim
+[color]
+ui = auto
+[url "ssh://username@athena-lb.devops.letv.com:29418/"]
+    InsteadOf = "athenar:"
+[url "ssh://username@athena.devops.letv.com:29418/"]
+    PushInsteadOf = "athenar:"
+[url "ssh://username@diana-lb.devops.letv.com:29418/"]
+    InsteadOf = "dianar:"
+[url "ssh://username@diana.devops.letv.com:29418/"]
+    PushInsteadOf = "dianar:"
+[url "ssh://username@minerva-lb.devops.letv.com:29418/"]
+    InsteadOf = "minervar:"
+[url "ssh://username@minerva.devops.letv.com:29418/"]
+    PushInsteadOf = "minervar:"
+[url "ssh://username@minerva.devops.letv.com:29418/tools/repo"]
+    InsteadOf=https://gerrit.googlesource.com/git-repo

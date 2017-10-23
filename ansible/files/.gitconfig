@@ -1,0 +1,19 @@
+[color]
+     ui = auto
+[user]
+    name = <Full Name>
+    email = <email>
+[url "ssh://<username>@minerva:29418/"]
+    PushInsteadOf = "minervar:"
+[url "ssh://<username>@minerva-us:29418/"]
+    InsteadOf = "minervar:"
+[url "ssh://<username>@diana:29418/"]
+    PushInsteadOf = "dianar:"
+[url "ssh://<username>@diana-us:29418/"]
+    InsteadOf = "dianar:"
+[url "ssh://<username>@athena:29418/"]
+    PushInsteadOf = "athenar:"
+[url "ssh://<username>@athena-us:29418/"]
+    InsteadOf = "athenar:"
+[url "ssh://<username>@minerva-us:29418/tools/repo"]
+    insteadOf=https://gerrit.googlesource.com/git-repo

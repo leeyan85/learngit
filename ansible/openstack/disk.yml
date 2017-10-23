@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+     - name: disk assign
+       script: /letv/leey/ansible/disk_assign.sh
+       #shell: echo "/dev/vda4 /letv ext4 defaults 0 0" >> /etc/fstab
+       sudo: yes

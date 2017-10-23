@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  remote_user: letv
+  tasks:
+   - name: restart VNC ports
+     script: /letv/scripts/ansible/restartvnc.sh
+     sudo: yes
+   #- name: start VNC ports
+    # shell: for i in `echo "{{ports.stdout}}"`;do  sudo  su - andbase -c "vncserver $i";done
+    # sudo: yes

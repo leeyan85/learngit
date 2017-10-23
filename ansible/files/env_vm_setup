@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# main script for vm env setup
+
+
+update_gitinfo () 
+{
+ username=`echo $MAIL|awk -F@ '{print $1}'`
+ if [ -z "$ALIAS" ];then
+   name=$username
+ else
+   name=$ALIAS
+ fi
+ cp ~/.gitconfig.sample ~/.gitconfig
+ sed -i "s/<Full Name>/$name/" ~/.gitconfig
+ sed -i "s/<email>/$MAIL/" ~/.gitconfig
+ sed -i "s/username/$username/g" ~/.gitconfig
+ cat ~/.gitconfig
+  
+}
+
+if [ $# -ge 1 ];then
+  while getopts ":m:hn:" opt
+   do
+    case $opt in
+        h) echo "env_vm_setup usage:"
+           echo "-m git mail address"
+           echo "-n git user name, optional"
+           exit 0
+           ;;
+        m) MAIL=$OPTARG
+           ;;
+        n) ALIAS=$OPTARG
+           ;;
+        ?) echo "arg error,please env_vm_setup -h"
+           echo 'example: ./env_vm_setup.sh -m andbase@le.com [-n "letv andbase"]'
+           exit 1;;
+    esac
+   done 
+else
+   echo -n "Enter the git mail address: "; 
+   read MAIL
+   username=`echo $MAIL|awk -F@ '{print $1}'`
+   echo "Enter the name of git user name, or press <ENTER> to accept the default: $username"
+   read ALIAS
+fi
+
+if [[ $MAIL ]];then
+  update_gitinfo
+fi

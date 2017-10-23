@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: copy
+      copy: src=/letv/bale/zabbix_agent/networkfs-check.sh dest=/etc/zabbix/zabbix_agentd.d mode=755
+      sudo: yes
+    - name: add corntab
+      cron: name='NFS check' minute='*/5' hour='*' job='/usr/bin/zabbix_sender -s `hostname` -c /etc/zabbix/zabbix_agentd.conf -k check.nfsdisk -o `/etc/zabbix/zabbix_agentd.d/networkfs-check.sh`'
+      sudo: yes
+      tags: crontab

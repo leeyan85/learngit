@@ -1,0 +1,31 @@
+---
+- hosts: all 
+  gather_facts: no
+  tasks:
+   - name: unzip local sdk env to remote server
+     unarchive: src=/letv/c9sdk.tar.gz dest=/letv copy=yes
+     sudo: yes
+   - name: unzip software which C9 need to remote server
+     unarchive: src=/letv/c9.tar.gz dest=/home/letv copy=yes owner=letv group=letv
+     sudo: yes
+   - name: modify the group and owner
+     file: path=/letv/c9sdk owner=letv group=letv  mode=0755 state=directory recurse=yes
+     sudo: yes
+   - name: copy startcloud.sh to remote server
+     copy: src=/letv/c9sdk/startcloud.sh dest=/letv/c9sdk/startcloud.sh mode=0755 owner=letv group=letv
+     sudo: yes
+   - name: install supervisor
+     apt: name=supervisor state=present
+     sudo: yes
+   - name: copy cloud.conf
+     copy: src=/letv/cloud.conf dest=/etc/supervisor/conf.d/cloud.conf
+     sudo: yes 
+   - name: stop supervisor 
+     service: name=supervisor state=stopped
+     sudo: yes
+   - name: start supervisor 
+     shell: supervisord -c /etc/supervisor/supervisord.conf
+     sudo: yes 
+   #- name: restart cloud9
+   #  shell: su - andbase -c "/letv/c9sdk/startcloud.sh"
+   #  sudo: yes 

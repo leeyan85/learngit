@@ -1,0 +1,3 @@
+#!/bin/bash
+ansible all  -i ./diantong.sh   -m copy -a "src=/letv/vmtools_backup/tools/test/home/andbase/.ssh/vmsetup dest=/home/andbase/.ssh/ owner=andbase group=andbase mode=755"  -s -K
+ansible all  -i ./diantong.sh   -m lineinfile  -a "dest=/home/andbase/.bashrc state=present line=\"alias vmcfg='sudo python2.7 /home/andbase/.ssh/vmsetup/vm_setup.py'\""  -s -K
